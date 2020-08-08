@@ -70,18 +70,7 @@ export default function Application(props) {
     interviewers: {}
   });
 
-  function bookInterview(id, interview) {
-    console.log(id, interview);
-    const appointment = {
-    ...state.appointments[id],
-    interview: { ...interview }
-    };
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
-    setState({...state, appointments});
-  }
+
 
 
   const setDay = day => setState({ ...state, day });
@@ -97,18 +86,31 @@ export default function Application(props) {
       // let [days, appointments] = all;
       // console.log(days);
       // console.log(appointments);
-      console.log(all[0]);
+      // console.log(all[0]);
       setState(prev => ({...prev, days: all[0].data,
       appointments: all[1].data, interviewers: all[2].data}))
     });
-  })
+  }, [])
 
   const appointments = getAppointmentsForDay(state, state.day)
+  const interviewers = getInterviewersForDay(state, state.day)
   
+  function bookInterview(id, interview) {
+    console.log(id, interview);
+    const appointment = {
+    ...state.appointments[id],
+    interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    setState({...state, appointments});
+  }
 
   const schedule = appointments.map(appointment => {
     const interview = getInterview(state, appointment.interview);
-    const interviewers = getInterviewersForDay(state, state.day)
+    
     
     return (
       <Appointment
@@ -133,7 +135,11 @@ export default function Application(props) {
           />
           <hr className="sidebar__separator sidebar--centered" />
           <nav className="sidebar__menu">
-            <DayList days={state.days} day={state.day} setDay={setDay} /></nav>
+            <DayList 
+              days={state.days} 
+              day={state.day} 
+              setDay={setDay} />
+            </nav>
           <img
           className="sidebar__lhl sidebar--centered"
           src="images/lhl.png"
@@ -142,7 +148,7 @@ export default function Application(props) {
       </section>
       <section className="schedule">
         {schedule}
-        <Appointment key="last" time="5pm"/>
+        <Appointment key="last" time="5pm" bookInterview={bookInterview}/>
       </section>
     </main>
   )

@@ -1,3 +1,4 @@
+// Function to find available appointments on the given day
 export function getAppointmentsForDay(state, day) {
   const validDays = state.days.map(day => day.name);
 
@@ -17,12 +18,23 @@ export function getInterview(state, interview) {
   return interviewObj;
 }
 
+// Function to find available interviewers on the given day
 export function getInterviewersForDay(state, day) {
-  const validDays = state.days.map(day => day.name);
+  const validDay = state.days.find((days) => days.name === day);
+  console.log('valid day:', validDay)
 
-  if (!day || !validDays.includes(day)) return [];
-  return state.days
-    .filter(interviewer => interviewer.name === day)[0]
-    .interviewers.map(apptId => state.appointments[apptId]);
+  if (!validDay) return [];
+
+  console.log(state.interviewers.keys)
+  const interviewers = [];
+  for (const key in state.interviewers) {
+    interviewers.push(state.interviewers[key]);
+    console.log(key);
+  }
+
+  const availableInterviewers = validDay.interviewers.map((intId) => state.interviewers[intId]) 
+  console.log('availableInterviewers', availableInterviewers);
+  return availableInterviewers;
+
 }
 
