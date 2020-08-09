@@ -127,7 +127,7 @@ export default function Application(props) {
         [id]: appointment
       };
      
-  return axios.pudeletet(`http://localhost:8001/api/appointments/${id}`)
+  return axios.delete(`http://localhost:8001/api/appointments/${id}`)
     .then (res => {
       setState({...state, appointments});
       return res
@@ -151,6 +151,7 @@ export default function Application(props) {
         interview={interview}
         interviewers={interviewers}
         bookInterview= {bookInterview}
+        cancelInterview= {cancelInterview}
       />
     );
   });
