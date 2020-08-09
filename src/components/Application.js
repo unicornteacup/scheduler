@@ -116,6 +116,28 @@ export default function Application(props) {
       })
     // })
   }
+
+  function editInterview(id, interview) {
+
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+      };
+      const appointments = {
+        ...state.appointments,
+        [id]: appointment
+      };
+     console.log('bookinterview;', interview)
+  return axios.put(`http://localhost:8001/api/appointments/${id}`, {interview})
+    .then (res => {
+      setState({...state, appointments});
+      return res
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  // })
+}
   
   function cancelInterview(id, interview) {
     const appointment = {
@@ -127,7 +149,7 @@ export default function Application(props) {
         [id]: appointment
       };
      
-  return axios.delete(`http://localhost:8001/api/appointments/${id}`)
+    return axios.delete(`http://localhost:8001/api/appointments/${id}`)
     .then (res => {
       setState({...state, appointments});
       return res
@@ -152,6 +174,7 @@ export default function Application(props) {
         interviewers={interviewers}
         bookInterview= {bookInterview}
         cancelInterview= {cancelInterview}
+        editInterview= {editInterview}
       />
     );
   });

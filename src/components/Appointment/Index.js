@@ -38,6 +38,10 @@ export default function Appointment(props) {
     .catch(error => console.log(error));    
   }
 
+  function edit() {
+    transition(EDIT)  
+  }
+
   function remove() {
     transition(CONFIRM)
   }
@@ -78,8 +82,8 @@ export default function Appointment(props) {
       {mode === CREATE && (
         <Form interviewers={props.interviewers} onSave={save} onCancel={event => back()}/>
       )}
-      {mode === CREATE && (
-        <Form interviewers={props.interviewers} onSave={save} onCancel={event => back()}/>
+      {mode === EDIT && (
+        <Form name={props.interview.student} interviewer={props.interview.interviewer.id} interviewers={props.interviewers} onSave={save} onCancel={event => back()}/>
       )}
       {mode === SAVING && (
       <Status message ={'Saving'}/>
