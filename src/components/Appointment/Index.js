@@ -7,6 +7,7 @@ import useVisualMode from "hooks/useVisualMode";
 import Form from "components/Appointment/Form";
 import Status from "components/Appointment/Status";
 import Confirm from "components/Appointment/Confirm";
+import useApplicationData from "hooks/useApplicationData";
 
 
 const EMPTY = "EMPTY";
@@ -50,7 +51,7 @@ export default function Appointment(props) {
   }
    
   
-  function confirm(event) {
+  function confirm(id) {
 
     transition(DELETING, true)
     props
