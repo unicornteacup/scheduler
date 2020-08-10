@@ -15,7 +15,9 @@ const CREATE = "CREATE";
 const SAVING = "SAVING";
 const DELETING = "DELETING";
 const CONFIRM = "CONFIRM";
-const EDIT= "EDIT"
+const EDIT= "EDIT";
+const ERROR_SAVE= "ERROR_SAVE";
+const ERROR_DELETE= "ERROR_DELETE"
 
 export default function Appointment(props) {
 
@@ -23,6 +25,7 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
+  //function to save a newly created appointment
   function save(name, interviewer) {
     const interview = {
       student: name,
@@ -32,10 +35,10 @@ export default function Appointment(props) {
     transition(SAVING);
     props
     .bookInterview(props.id, interview)
-    .then(() => {
-      transition(SHOW)
-    })
-    .catch(error => console.log(error));    
+    .then(() => transition(SHOW))
+    .catch(error => transition(ERROR_SAVE, true));   
+    
+       
   }
 
   function edit() {
@@ -47,19 +50,13 @@ export default function Appointment(props) {
   }
    
   
-  function confirm(name, interviewer) {
-    const interview = {
-      student: name,
-      interviewer
-    }
-    console.log('interview:', interview)
-    transition(DELETING)
+  function confirm(event) {
+
+    transition(DELETING, true)
     props
-    .cancelInterview(props.id, interview)
-    .then(() => {
-      transition(EMPTY)
-    })
-    .catch(error => console.log(error));    
+    .cancelInterview(props.id)
+    .then(() => transition(EMPTY))
+    .catch(error => transition(ERROR_DELETE, true));    
   }
 
   return (
