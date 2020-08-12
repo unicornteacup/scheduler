@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import axios from "axios";
 
-export default function useVisualMode(initial){
+export default function useApplicationData(initial){
 
   const [state, setState] = useState({
     day: "Monday",
@@ -42,7 +42,7 @@ export default function useVisualMode(initial){
         [id]: appointment
       };
      console.log('bookinterview;', interview)
-  return axios.put(`http://localhost:8001/api/appointments/${id}`, {interview})
+    return axios.put(`http://localhost:8001/api/appointments/${id}`, {interview})
     .then ((res) => {
       const daysList = [];
       for (let day of state.days) {
@@ -52,8 +52,8 @@ export default function useVisualMode(initial){
         }
       } 
 
-      setState({...state, days: daysList});
-      return setState({...state, appointments});
+     
+      return setState({...state, days: daysList, appointments});
       
     })
     .catch(err => {
@@ -75,11 +75,12 @@ function editInterview(id, interview) {
    console.log('bookinterview;', interview)
 return axios.put(`http://localhost:8001/api/appointments/${id}`, {interview})
   .then (res => {
+    console.log("edit res:", res);
     setState({...state, appointments});
     return res
   })
   .catch(err => {
-    console.log(err)
+    console.log("edit err:", err)
   })
 // })
 }
