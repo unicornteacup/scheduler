@@ -41,7 +41,7 @@ export default function useApplicationData(initial){
         ...state.appointments,
         [id]: appointment
       };
-     console.log('bookinterview;', interview)
+    //  console.log('bookinterview;', interview)
     return axios.put(`http://localhost:8001/api/appointments/${id}`, {interview})
     .then ((res) => {
       const daysList = [];
@@ -57,7 +57,7 @@ export default function useApplicationData(initial){
       
     })
     .catch(err => {
-      console.log(err)
+      // console.log(err)
     })
   // })
 }
@@ -72,15 +72,15 @@ function editInterview(id, interview) {
       ...state.appointments,
       [id]: appointment
     };
-   console.log('bookinterview;', interview)
+  //  console.log('bookinterview;', interview)
 return axios.put(`http://localhost:8001/api/appointments/${id}`, {interview})
   .then (res => {
-    console.log("edit res:", res);
+    // console.log("edit res:", res);
     setState({...state, appointments});
     return res
   })
   .catch(err => {
-    console.log("edit err:", err)
+    // console.log("edit err:", err)
   })
 // })
 }
@@ -109,7 +109,7 @@ function cancelInterview(id, interview) {
     return setState({...state, appointments: appointments});
   })
   .catch(err => {
-    console.log(err)
+    // console.log(err)
   })
 }
 
