@@ -56,9 +56,7 @@ export default function useApplicationData(initial){
       return setState({...state, days: daysList, appointments});
       
     })
-    .catch(err => {
-      // console.log(err)
-    })
+
   // })
 }
 
@@ -78,9 +76,6 @@ return axios.put(`http://localhost:8001/api/appointments/${id}`, {interview})
     // console.log("edit res:", res);
     setState({...state, appointments});
     return res
-  })
-  .catch(err => {
-    // console.log("edit err:", err)
   })
 // })
 }
@@ -108,9 +103,7 @@ function cancelInterview(id, interview) {
     setState({...state, days: daysList});
     return setState({...state, appointments: appointments});
   })
-  .catch(err => {
-    // console.log(err)
-  })
+  
 }
 
 
