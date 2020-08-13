@@ -2,6 +2,8 @@ import React from "react";
 import "components/DayListItem.scss";
 import Classnames from "classnames";
 
+// Function to display the number of open spots remaining for each week day 
+
 export default function DayListItem(props) {
   const formatSpots = function (props) {
     let spotsRemaining = props.spots

@@ -23,7 +23,6 @@ const ERROR_DELETE= "ERROR_DELETE";
 
 export default function Appointment(props) {
 
-  // console.log('appointment interviewers props:', props.interviewers);
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
@@ -34,28 +33,28 @@ export default function Appointment(props) {
       student: name,
       interviewer
     }
-    // console.log('interview:', interview)
     transition(SAVING);
     props
     .bookInterview(props.id, interview)
     .then(() => transition(SHOW))
     .catch(error => {
-      console.log('save err:', error)
       transition(ERROR_SAVE, true)
     });   
     
        
   }
 
+  //function to edit an existing appointment
   function edit() {
     transition(EDIT)  
   }
 
+  //function to cancel an existing appointment
   function remove() {
     transition(CONFIRM)
   }
    
-  
+  //function to confirm deleting an existing appointment
   function confirm(id) {
 
     transition(DELETING, true)
@@ -63,7 +62,6 @@ export default function Appointment(props) {
     .cancelInterview(props.id)
     .then(() => transition(EMPTY))
     .catch(error => {
-      console.log('delete err:', error)
       transition(ERROR_DELETE, true)
     });    
   }
@@ -92,7 +90,7 @@ export default function Appointment(props) {
         <Form name={props.interview.student} interviewer={props.interview.interviewer.id} interviewers={props.interviewers} onSave={save} onCancel={event => back()}/>
       )}
       {mode === SAVING && (
-      <Status message ={'Saving'}/>
+        <Status message ={'Saving'}/>
       )}
       {mode === CONFIRM && (
         <Confirm
@@ -100,15 +98,14 @@ export default function Appointment(props) {
         />
       )}
       {mode === DELETING && (
-      <Status message ={'Deleting'}/>
+        <Status message ={'Deleting'}/>
       )}
       {mode === ERROR_DELETE && (
-      <Error message ={'There was an error deleting your appointment'} onClose={event => back()}/>
+        <Error message ={'There was an error deleting your appointment'} onClose={event => back()}/>
       )}
       {mode === ERROR_SAVE && (
-      <Error message ={'There was an error saving your appointment'} onClose={event => back()}/>
+        <Error message ={'There was an error saving your appointment'} onClose={event => back()}/>
       )}
-
     </article>
   )
 }

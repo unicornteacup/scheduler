@@ -1,5 +1,6 @@
 import React from "react";
 
+// Function to flag an error in a save or deletion action
 
 export default function Error(props) {
 

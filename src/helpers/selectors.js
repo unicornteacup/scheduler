@@ -21,19 +21,15 @@ export function getInterview(state, interview) {
 // Function to find available interviewers on the given day
 export function getInterviewersForDay(state, day) {
   const validDay = state.days.find((days) => days.name === day);
-  console.log('valid day:', validDay)
 
   if (!validDay) return [];
 
-  console.log(state.interviewers.keys)
   const interviewers = [];
   for (const key in state.interviewers) {
     interviewers.push(state.interviewers[key]);
-    console.log(key);
   }
 
   const availableInterviewers = validDay.interviewers.map((intId) => state.interviewers[intId]) 
-  console.log('availableInterviewers', availableInterviewers);
   return availableInterviewers;
 
 }

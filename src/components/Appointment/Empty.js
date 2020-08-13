@@ -1,5 +1,7 @@
 import React from "react";
 
+// Function to add a new appointment booking form
+
 export default function Empty(props) {
 
   return (

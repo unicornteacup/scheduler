@@ -1,5 +1,6 @@
 import React from "react";
 
+// Function to show the saving or deleting status of an appointment
 
 export default function Status(props) {
 

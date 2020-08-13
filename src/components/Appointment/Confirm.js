@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "components/Button";
 
+// Function to either confirm or cancel an edit or deletion action
 
 export default function Confirm(props) {
 

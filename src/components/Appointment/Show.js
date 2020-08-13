@@ -1,8 +1,8 @@
 import React from "react";
 
+// Function to show an existing appointment
 
 export default function Show(props) {
-  // console.log('form props:', props)
 
   return (
 <main className="appointment__card appointment__card--show">
