@@ -8,7 +8,7 @@ import Form from "components/Appointment/Form";
 import Status from "components/Appointment/Status";
 import Confirm from "components/Appointment/Confirm";
 import Error from "components/Appointment/Error";
-import useApplicationData from "hooks/useApplicationData";
+// import useApplicationData from "hooks/useApplicationData";
 
 
 const EMPTY = "EMPTY";
@@ -34,14 +34,23 @@ export default function Appointment(props) {
       interviewer
     }
     transition(SAVING);
-    props
-    .bookInterview(props.id, interview)
-    .then(() => transition(SHOW))
-    .catch(error => {
-      transition(ERROR_SAVE, true)
-    });   
-    
-       
+
+    if (mode === EDIT) {
+      props
+      .editInterview(props.id, interview)
+      .then(() => transition(SHOW))
+      .catch(error => {
+        transition(ERROR_SAVE, true)
+      }); 
+    } else {    
+      props
+      .bookInterview(props.id, interview)
+      .then(() => transition(SHOW))
+      .catch(error => {
+        transition(ERROR_SAVE, true)
+      }); 
+    } 
+         
   }
 
   //function to edit an existing appointment

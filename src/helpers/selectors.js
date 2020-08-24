@@ -15,6 +15,9 @@ export function getInterview(state, interview) {
   };
 
   interviewObj.interviewer = state.interviewers[interview.interviewer];
+  console.log('interview:', interview)
+  console.log('state:', state)
+  console.log('interviewObj:', interviewObj)
   return interviewObj;
 }
 
@@ -22,7 +25,9 @@ export function getInterview(state, interview) {
 export function getInterviewersForDay(state, day) {
   const validDay = state.days.find((days) => days.name === day);
 
-  if (!validDay) return [];
+  if (!validDay) {
+    return [];
+  }
 
   const interviewers = [];
   for (const key in state.interviewers) {
