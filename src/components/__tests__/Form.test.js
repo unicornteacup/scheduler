@@ -7,7 +7,7 @@ import React from "react";
   We import our helper functions from the react-testing-library
   The render function allows us to render Components
 */
-import { render, cleanup } from "@testing-library/react";
+import { render, cleanup, getAllByAltText } from "@testing-library/react";
 import { fireEvent } from '@testing-library/react';
 
 /*
@@ -63,7 +63,8 @@ describe("Form", () => {
     const { getByText, getByPlaceholderText, queryByText, getByAltText } = render(
       <Form interviewers={interviewers} onSave={onSave} />
     );
-    fireEvent.click(getByAltText(interviewers, "Sylvia Palmer"));
+    
+    fireEvent.click(getByAltText("Sylvia Palmer"));
   
     fireEvent.click(getByText("Save"));
   
@@ -80,7 +81,7 @@ describe("Form", () => {
     expect(queryByText(/student name cannot be blank/i)).toBeNull();
   
     expect(onSave).toHaveBeenCalledTimes(1);
-    expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", "Sylvia Palmer");
+    expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", 1);
   });
 
   it("calls onCancel and resets the input field", () => {
